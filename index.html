@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURASYNC | PORTAL SYSTEM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;900&family=Share+Tech+Mono&display=swap');
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, sans-serif;
+            background: #02040a;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .brand-logo-text {
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+        .brand-logo-text span.logo-large {
+            font-size: 2.2rem;
+            letter-spacing: 0.08em;
+        }
+        .brand-logo-text span.logo-small {
+            font-size: 1.5rem;
+            letter-spacing: 0.03em;
+            opacity: 0.85;
+        }
+
+        .pearl-3d {
+            background: radial-gradient(circle at 30% 25%, #ffffff 0%, #f8fafc 15%, #cbd5e1 40%, #475569 70%, #1e293b 100%);
+            box-shadow: inset -10px -10px 25px rgba(15, 23, 42, 0.6), inset 10px 10px 20px rgba(255, 255, 255, 0.7), 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .agent-split-sphere {
+            background: linear-gradient(90deg, #06b6d4 0%, #3b82f6 50%, #e2e8f0 50%, #cbd5e1 100%);
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .ios-blur {
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex justify-center items-center p-0 sm:p-4">
+
+    <div class="w-full max-w-md h-[920px] bg-black rounded-[55px] shadow-2xl border-4 border-slate-900 relative overflow-hidden flex flex-col">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-indigo-950/40 z-0"></div>
+
+        <div class="w-full h-11 bg-transparent px-8 flex justify-between items-center text-xs font-medium z-50 shrink-0 select-none">
+            <div class="font-mono">12:55 <span class="text-[10px] text-slate-400">Sun 5 Jul</span></div>
+            <div class="w-32 h-5 bg-black rounded-b-2xl absolute left-1/2 transform -translate-x-1/2 top-0 flex justify-center items-center">
+                <div class="w-12 h-3 bg-slate-900 rounded-full border border-slate-800/50"></div>
+            </div>
+            <div class="flex items-center space-x-2 text-slate-300">
+                <i class="fas fa-signal text-[10px]"></i>
+                <i class="fas fa-wifi text-[10px]"></i>
+                <i class="fas fa-battery-full text-emerald-400"></i>
+            </div>
+        </div>
+
+        <div id="main-app-carousel" class="flex-1 w-[500%] flex transition-transform duration-500 ease-out h-[calc(100%-110px)] relative z-20" style="transform: translateX(0%);">
+            
+            <section class="w-1/5 h-full flex flex-col p-6 overflow-y-auto hide-scrollbar justify-center">
+                <div class="bg-slate-950/60 border border-slate-900/60 rounded-[32px] p-6 ios-blur space-y-5">
+                    <div class="text-center space-y-1">
+                        <div class="w-12 h-12 rounded-full pearl-3d mx-auto opacity-90 scale-75"></div>
+                        <h2 class="text-xs font-mono font-bold tracking-[0.25em] text-white">IDENTITY PROFILE ACCESS</h2>
+                    </div>
+                    <div class="space-y-3.5">
+                        <div class="space-y-1">
+                            <label class="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Username Address</label>
+                            <input id="onboard-user" type="text" value="identity@aurasync.online" class="w-full bg-slate-950 border border-slate-900 rounded-xl px-3 py-2 text-slate-200 text-xs font-mono focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Access Secret Key</label>
+                            <input id="onboard-pass" type="password" value="••••••••" class="w-full bg-slate-950 border border-slate-900 rounded-xl px-3 py-2 text-slate-200 text-xs font-mono focus:outline-none focus:border-cyan-500">
+                        </div>
+                    </div>
+                    <button type="button" onclick="processUserAuthenticationGateway()" class="w-full bg-slate-100 hover:bg-slate-200 text-black font-semibold font-mono text-xs py-3 rounded-xl transition-all tracking-wide">INITIALIZE ARRAYS</button>
+                </div>
+            </section>
+
+            <section class="w-1/5 h-full flex flex-col p-5 overflow-y-auto hide-scrollbar justify-between">
+                <div class="bg-slate-900/60 border border-slate-800/80 rounded-[32px] p-6 text-center ios-blur space-y-3 mt-2">
+                    <div class="w-20 h-20 mx-auto rounded-full pearl-3d"></div>
+                    <div class="brand-logo-text font-mono text-white flex justify-center items-baseline">
+                        <span class="logo-large">AURA</span><span class="logo-small">SYNC</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed text-justify px-2 bg-slate-950/40 p-3 rounded-xl border border-slate-900">
+                        AuraSync matches physical environment sound markers with real-time gradient illumination properties to shape clean personal media spaces.
+                    </p>
+                    <div class="text-[10px] text-center text-cyan-400 border-t border-slate-800/60 pt-2 italic font-mono">www.aurasync.online</div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-900 rounded-2xl p-3 space-y-2 mb-2">
+                    <div class="flex justify-between items-center px-1">
+                        <span class="text-[8px] font-mono text-slate-500 uppercase tracking-widest"><i class="fas fa-video text-cyan-500 mr-1.5"></i>LAUNCH DAY PROMO</span>
+                        <span class="text-[8px] bg-slate-900 text-purple-400 px-2 py-0.5 rounded font-mono">1 of 2 videos this fortnight</span>
+                    </div>
+                    <div class="w-full h-32 bg-gradient-to-br from-slate-950 via-cyan-950/20 to-indigo-950/50 rounded-xl flex flex-col items-center justify-center border border-slate-900 p-4 text-center">
+                        <i class="fas fa-rocket text-cyan-400 text-xl mb-1"></i>
+                        <span class="text-[10px] font-mono text-slate-200 uppercase tracking-wider block">LAUNCH DAY PROMO GENERATED</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="w-1/5 h-full flex flex-col p-5 overflow-y-auto hide-scrollbar space-y-4">
+                <div class="bg-slate-900/60 border border-slate-800/80 rounded-[32px] p-4 ios-blur space-y-4 mt-2">
+                    <div class="flex justify-between items-center border-b border-slate-800/60 pb-2">
+                        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400"><i class="fas fa-sliders-h mr-1.5"></i> AV REMIX MATRICES</span>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-900 p-3 rounded-2xl space-y-2.5">
+                        <span class="text-[8px] font-mono text-slate-500 uppercase tracking-widest block"><i class="fab fa-spotify mr-1"></i>Unified Audio Engine</span>
+                        <div class="flex space-x-2">
+                            <input id="music-search-field" type="text" placeholder="Search Track or URL..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-slate-200 focus:outline-none">
+                            <button type="button" onclick="executeMusicApiLookupRoute()" class="bg-slate-800 hover:bg-slate-700 px-3 rounded-lg text-xs text-slate-400"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-900 p-3 rounded-2xl space-y-3">
+                        <span class="text-[8px] font-mono text-slate-500 uppercase tracking-widest block"><i class="fas fa-image mr-1.5"></i>LAUNCH IMAGES</span>
+                        <div class="grid grid-cols-2 gap-2 text-center">
+                            <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 cursor-pointer" onclick="alert('Launch Day Square Asset Frame Verified')">
+                                <i class="fas fa-sparkles text-amber-400 block mb-1 text-xs"></i>
+                                <span class="text-[9px] font-mono text-slate-300">Square Frame</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 cursor-pointer" onclick="alert('Launch Day Vertical Asset Frame Verified')">
+                                <i class="fas fa-mobile-screen text-cyan-400 block mb-1 text-xs"></i>
+                                <span class="text-[9px] font-mono text-slate-300">Portrait Frame</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shop-shelf-view" class="w-1/5 h-full flex flex-col p-5 overflow-y-auto hide-scrollbar space-y-4">
+                <div class="mt-2 flex justify-between items-end border-b border-slate-900 pb-2">
+                    <h2 class="text-base font-bold font-mono text-white tracking-tight">DIGITAL COMPOSITIONS</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div onclick="launchProductDeepDiveVertical('Crystalline Waves', '₹1,499', '4K Mobile Layout', 'High-definition canvas composition rendering deep water light fields.')" class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-2 flex flex-col justify-between h-52 cursor-pointer hover:border-slate-700">
+                        <div class="w-full h-28 bg-gradient-to-t from-slate-950 to-cyan-950/20 rounded-xl flex items-center justify-center border border-slate-900"><i class="fas fa-droplet text-xl text-cyan-500/30"></i></div>
+                        <div class="pt-1.5 px-1 font-mono">
+                            <span class="text-[11px] text-slate-300 block truncate">Crystalline Waves</span>
+                            <span class="text-[10px] text-cyan-400 block mt-0.5">₹1,499</span>
+                        </div>
+                    </div>
+                    <div onclick="launchProductDeepDiveVertical('Abyssal Fluid Flow', '₹1,850', '4K Desktop Layout', 'Abstract generative landscape maps calculating fluid channel metrics.')" class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-2 flex flex-col justify-between h-52 cursor-pointer hover:border-slate-700">
+                        <div class="w-full h-28 bg-gradient-to-t from-slate-950 to-purple-950/20 rounded-xl flex items-center justify-center border border-slate-900"><i class="fas fa-wave-square text-xl text-purple-500/30"></i></div>
+                        <div class="pt-1.5 px-1 font-mono">
+                            <span class="text-[11px] text-slate-300 block truncate">Abyssal Fluid Flow</span>
+                            <span class="text-[10px] text-cyan-400 block mt-0.5">₹1,850</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shop-dive-view" class="w-1/5 h-full flex flex-col p-5 overflow-y-auto hide-scrollbar space-y-4 hidden">
+                <button type="button" onclick="exitProductDeepDiveVertical()" class="text-[9px] font-mono text-slate-500 mt-2 flex items-center space-x-1.5"><i class="fas fa-arrow-left"></i> <span>RETURN</span></button>
+                <div class="bg-slate-950 border border-slate-900 rounded-2xl p-4 space-y-1">
+                    <h3 id="dive-item-title" class="text-xs font-bold font-mono text-white">Item Spec</h3>
+                    <p id="dive-item-desc" class="text-[11px] text-slate-400 leading-relaxed pt-2">Details text data container.</p>
+                </div>
+            </section>
+
+            <section class="w-1/5 h-full flex flex-col p-5 overflow-y-auto hide-scrollbar justify-center space-y-3.5">
+                <div class="bg-slate-950/60 border border-slate-900/80 rounded-[32px] p-5 ios-blur space-y-4">
+                    <div class="text-center space-y-1.5">
+                        <div class="w-14 h-14 rounded-full agent-split-sphere mx-auto flex items-center justify-center text-slate-950 text-xs font-black font-mono">GO</div>
+                        <h2 class="text-xs font-bold font-mono tracking-widest text-white">GEMINI OMNI HUB</h2>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-900 rounded-2xl p-3.5 space-y-1.5 text-[10px] font-mono">
+                        <div class="text-slate-400 text-[9px] uppercase tracking-wider pb-1 border-b border-slate-900 flex justify-between">
+                            <span>Social Channels</span>
+                            <span class="text-purple-400">Shared Password</span>
+                        </div>
+                        <div><i class="fab fa-instagram w-4 text-pink-500"></i> Insta ID: <span class="text-slate-400">@aurasync.official</span></div>
+                        <div><i class="fab fa-twitter w-4 text-cyan-400"></i> Twitter ID: <span class="text-slate-400">@AuraSyncGlobal</span></div>
+                        <div><i class="fab fa-whatsapp w-4 text-emerald-500"></i> WhatsApp: <span class="text-slate-400">+91 98101 AURA0</span></div>
+                        <div><i class="fab fa-spotify w-4 text-green-400"></i> Spotify: <span class="text-slate-400">AuraSync Ambient Records</span></div>
+                        <div><i class="fab fa-youtube w-4 text-rose-500"></i> YouTube: <span class="text-slate-400">AuraSync Network</span></div>
+                        <div class="text-[9px] text-amber-400 border-t border-slate-900/60 pt-1 mt-1">Key: <span class="font-bold select-text">AuraSyncCore2026!</span></div>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-900 rounded-2xl p-3 text-[10px] font-mono text-slate-400">
+                        <span class="text-emerald-400 block text-[9px] font-bold"><i class="fas fa-microchip mr-1.5"></i>AI AGENT THROTTLE CONSTRAINTS</span>
+                        Strict limit active: Only 2 promotional video generation routines per fortnight allowed. System celebration packages fully scrubbed.
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-900 p-2 rounded-2xl">
+                        <button type="button" onclick="triggerAdvanceSocialReviewWindow()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-mono py-1.5 rounded-lg uppercase">Verify 2 Days Before Launch</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="h-16 bg-slate-950/95 border-t border-slate-900/80 px-6 flex justify-between items-center z-50 shrink-0 select-none">
+            <button type="button" onclick="shiftOmniViewCanvas(1)" class="flex flex-col items-center justify-center text-slate-500"><i class="fas fa-home text-xs"></i><span class="text-[8px] font-mono mt-0.5 uppercase">Home</span></button>
+            <button type="button" onclick="shiftOmniViewCanvas(2)" class="flex flex-col items-center justify-center text-slate-500"><i class="fas fa-sliders-h text-xs"></i><span class="text-[8px] font-mono mt-0.5 uppercase">Studio</span></button>
+            <button type="button" onclick="shiftOmniViewCanvas(3)" class="flex flex-col items-center justify-center text-slate-500"><i class="fas fa-bag-shopping text-xs"></i><span class="text-[8px] font-mono mt-0.5 uppercase">Shop</span></button>
+            <button type="button" onclick="shiftOmniViewCanvas(4)" class="flex flex-col items-center justify-center text-slate-500"><i class="fas fa-robot text-xs"></i><span class="text-[8px] font-mono mt-0.5 uppercase">Omni</span></button>
+            <button type="button" onclick="toggleExternalUtilityPanel()" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-[10px] text-indigo-400"><i class="fas fa-plus"></i></button>
+        </footer>
+
+        <div id="external-shared-drawer" class="absolute bottom-16 left-0 right-0 bg-slate-950/95 border-t border-slate-900 p-4 transform translate-y-full transition-transform duration-300 z-50 flex flex-col space-y-2">
+            <div class="grid grid-cols-3 gap-2 text-center text-[9px] font-mono">
+                <div class="p-2 bg-slate-900 rounded-xl border border-slate-800 text-slate-300" onclick="alert('Redirecting to Insta API Grid Link...')">INSTA</div>
+                <div class="p-2 bg-slate-900 rounded-xl border border-slate-800 text-slate-300" onclick="alert('Redirecting to WhatsApp Business Routing...')">WHATSAPP</div>
+                <div class="p-2 bg-slate-900 rounded-xl border border-slate-800 text-slate-300" onclick="alert('Redirecting to Twitter Dispatch URL...')">TWITTER</div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-1 left-0 right-0 text-center text-[7.5px] text-slate-600 font-mono tracking-tight pointer-events-none z-50">
+            Copyright © 2026, AuraSync.
+        </div>
+    </div>
+
+    <script>
+        function shiftOmniViewCanvas(viewIndex) {
+            const carousel = document.getElementById('main-app-carousel');
+            if (!carousel) return;
+            
+            // Map index calculations accurately down to percentages (0 = 0%, 1 = -20%, 2 = -40%, etc.)
+            const calculatedOffset = viewIndex * 20;
+            carousel.style.transform = `translateX(-${calculatedOffset}%)`;
+            
+            const shelf = document.getElementById('shop-shelf-view');
+            const dive = document.getElementById('shop-dive-view');
+            if (viewIndex !== 3 && shelf && dive) {
+                dive.classList.add('hidden');
+                shelf.classList.remove('hidden');
+            }
+
+            const buttons = document.querySelectorAll('footer > button');
+            buttons.forEach((btn, idx) => {
+                if((idx + 1) === viewIndex) {
+                    btn.classList.remove('text-slate-500');
+                    btn.classList.add('text-indigo-400');
+                } else if (idx < 4) {
+                    btn.classList.remove('text-indigo-400');
+                    btn.classList.add('text-slate-500');
+                }
+            });
+        }
+
+        function processUserAuthenticationGateway() {
+            shiftOmniViewCanvas(1);
+        }
+
+        function executeMusicApiLookupRoute() {
+            const val = document.getElementById('music-search-field').value;
+            if(val && val.trim() !== "") {
+                alert(`Query route processed through system parameters: "${val}"`);
+            }
+        }
+
+        function launchProductDeepDiveVertical(name, cost, specs, description) {
+            document.getElementById('dive-item-title').innerText = `${name} — ${cost}`;
+            document.getElementById('dive-item-desc').innerText = description;
+            document.getElementById('shop-shelf-view').classList.add('hidden');
+            document.getElementById('shop-dive-view').classList.remove('hidden');
+        }
+
+        function exitProductDeepDiveVertical() {
+            document.getElementById('shop-dive-view').classList.add('hidden');
+            document.getElementById('shop-shelf-view').classList.remove('hidden');
+        }
+
+        function toggleExternalUtilityPanel() {
+            document.getElementById('external-shared-drawer').classList.toggle('translate-y-full');
+        }
+
+        function triggerAdvanceSocialReviewWindow() {
+            alert("[Gemini Omni Notification]\n\nValidation check run exactly 2 days before release window. Assets compiled, passwords aligned, tracking array clear.");
+        }
+
+        // SELF-HEALING FORCE BOOT ROUTINE: Runs on load to ensure sliders are pinned to view 0 immediately
+        function enforceInitializationAnchoring() {
+            const carousel = document.getElementById('main-app-carousel');
+            if(carousel) {
+                carousel.style.transform = "translateX(0%)";
+            }
+            console.log("Core View Engine Anchored to Index 0 successfully.");
+        }
+
+        window.onload = enforceInitializationAnchoring;
+        document.addEventListener("DOMContentLoaded", enforceInitializationAnchoring);
+    </script>
+</body>
+</html>
