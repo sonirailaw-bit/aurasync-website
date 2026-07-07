@@ -4,6 +4,8 @@
 // that wraps all pages. This was missing, which is why /studio (and any
 // other page) was 404ing even though the build succeeded.
 
+import "./globals.css";
+
 export const metadata = {
   title: "AuraSync",
   description: "Pair your photos and videos with music to create a Sync.",
